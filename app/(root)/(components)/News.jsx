@@ -11,22 +11,22 @@ export default function News() {
   // Memoize the fetching logic
   const fetchedData = useMemo(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/db");
-      const response2 = await fetch("/api/gs");
+      const response = await fetch(".netlify/functions/divyaBhaskar");
+      // const response2 = await fetch("/api/gs");
       const data = await response.json();
-      const data2 = await response2.json();
+      // const data2 = await response2.json();
       const articles = data.articles;
-      const articles2 = data2.articles;
+      // const articles2 = data2.articles;
       // Filter out duplicates based on the 'link' property
       const uniqueData = articles.filter(
         (item, index, self) =>
           index === self.findIndex((t) => t.link === item.link),
       );
-      const uniqueData2 = articles2.filter(
-        (item, index, self) =>
-          index === self.findIndex((t) => t.link === item.link),
-      );
-      return uniqueData.concat(uniqueData2);
+      // const uniqueData2 = articles2.filter(
+      //   (item, index, self) =>
+      //     index === self.findIndex((t) => t.link === item.link),
+      // );
+      return uniqueData;
     };
     return fetchData();
   }, []); // Dependencies array, empty means it will only run once
