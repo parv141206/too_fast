@@ -8,35 +8,26 @@ export default function News() {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Memoize the fetching logic
   const fetchedData = useMemo(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:3000/api/db");
-      const response2 = await fetch("http://localhost:3000/api/gs");
+      const response = await fetch(`https://too-fast.vercel.app/api/gs`);
       const data = await response.json();
-      // const data2 = await response2.json();
       const articles = data.articles;
-      // const articles2 = data2.articles;
-      // Filter out duplicates based on the 'link' property
       const uniqueData = articles.filter(
         (item, index, self) =>
           index === self.findIndex((t) => t.link === item.link),
       );
-      // const uniqueData2 = articles2.filter(
-      //   (item, index, self) =>
-      //     index === self.findIndex((t) => t.link === item.link),
-      // );
       return uniqueData;
     };
     return fetchData();
-  }, []); // Dependencies array, empty means it will only run once
+  }, []);
 
   useEffect(() => {
     fetchedData.then((data) => {
       setIsLoading(false);
-      setNews(data); // Update state with fetched data
+      setNews(data);
     });
-  }, [fetchedData]); // Depend on fetchedData to trigger the effect
+  }, [fetchedData]);
 
   return (
     <div

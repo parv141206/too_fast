@@ -7,11 +7,11 @@ export async function scrapeGujaratSamachar() {
   console.log("huh");
 
   await page.evaluate(() => {
-    window.scrollTo(0, 10000 * window.innerHeight); // Increase the scroll distance
+    window.scrollTo(0, 10000 * window.innerHeight);
   });
 
   await page.waitForFunction(
-    'document.querySelectorAll(".news-title").length > 0'
+    'document.querySelectorAll(".news-title").length > 0',
   );
 
   const data = await page.evaluate(() => {

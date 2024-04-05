@@ -7,7 +7,7 @@ export async function scrapeDivyaBhaskar() {
   console.log("huh");
 
   await page.evaluate(() => {
-    window.scrollTo(0, 10000 * window.innerHeight); // Increase the scroll distance
+    window.scrollTo(0, 10000 * window.innerHeight);
   });
 
   await page.waitForFunction(
@@ -21,8 +21,8 @@ export async function scrapeDivyaBhaskar() {
       const aTag = element.querySelector("a");
       const location = element.querySelector(".fd4e34d0");
       return {
-        text: title.textContent, // Extract the text content of the element
-        link: aTag ? aTag.href : null, // Extract the href attribute of the <a> tag
+        text: title.textContent,
+        link: aTag ? aTag.href : null,
         location: location ? location.textContent : null,
       };
     });
@@ -30,10 +30,9 @@ export async function scrapeDivyaBhaskar() {
 
   const res = {
     source: "Divya Bhaskar",
-    articles: data, // Store the extracted text and links
+    articles: data,
   };
 
-  // console.log(res);
   await browser.close();
   return res;
 }
