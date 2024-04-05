@@ -11,8 +11,8 @@ export default function News() {
   // Memoize the fetching logic
   const fetchedData = useMemo(() => {
     const fetchData = async () => {
-      const response = await fetch(".netlify/functions/divyaBhaskar");
-      // const response2 = await fetch("/api/gs");
+      const response = await fetch("http://localhost:3000/api/db");
+      const response2 = await fetch("http://localhost:3000/api/gs");
       const data = await response.json();
       // const data2 = await response2.json();
       const articles = data.articles;
